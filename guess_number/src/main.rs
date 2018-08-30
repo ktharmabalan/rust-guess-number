@@ -24,7 +24,13 @@ fn main() {
         }
 
         // Parse input to integer
-        let guess: u32 = guess.trim().parse().expect("Please type a number");
+        let guess: u32 = match guess.trim().parse() {
+            Ok(num) => num,
+            Err(_) => continue,
+        };
+        // .expect("Please type a number");
+
+        print!("You guessed {}. ", guess);
 
         let mut result = false;
         // Compare input to secret number
@@ -41,8 +47,6 @@ fn main() {
         if result {
             println!("Exiting the program");
             break;
-        } else {
-            println!("You guessed {}", guess);
         }
     }
 }
